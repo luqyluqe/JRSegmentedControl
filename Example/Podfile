@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'JRSegmentedControl_Example', :exclusive => true do
+  pod 'JRSegmentedControl', :path => '../'
+end
+
+target 'JRSegmentedControl_Tests', :exclusive => true do
+  pod 'JRSegmentedControl', :path => '../'
+
+  pod 'FBSnapshotTestCase'
+end
