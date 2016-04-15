@@ -26,7 +26,8 @@
         [segments addObject:segment];
     }
     JRSegmentedControlConfiguration* config=[JRSegmentedControlConfiguration defaultConfiguration];
-    config.separatorWidth=2;
+    config.separatorWidth=1;
+    config.separatorHeight=20;
     JRSegmentedControl* segmentedControl=[[JRSegmentedControl alloc] initWithFrame:CGRectMake(bounds.origin.x, bounds.origin.y+20, bounds.size.width, 30) segments:segments configuration:config];
     [self.view addSubview:segmentedControl];
 }

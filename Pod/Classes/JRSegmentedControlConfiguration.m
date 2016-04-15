@@ -19,6 +19,7 @@
     config.font=[UIFont systemFontOfSize:14];
     config.indicatorWidth=2;
     config.separatorWidth=0;
+    config.separatorHeight=0;
     return config;
 }
 

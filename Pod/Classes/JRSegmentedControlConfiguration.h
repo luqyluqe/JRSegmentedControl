@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger,JRSegmentedControlIndicatorPosition){
 @property (nonatomic,assign) UIFont* font;
 @property (nonatomic,copy) UIColor* textColor;
 @property (nonatomic,assign) CGFloat separatorWidth;
+@property (nonatomic,assign) CGFloat separatorHeight;
 @property (nonatomic,copy) UIColor* separatorColor;
 
 +(JRSegmentedControlConfiguration*)defaultConfiguration;

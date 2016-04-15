@@ -50,7 +50,7 @@
         self.backgroundColor=self.configuration.tintColor?:self.configuration.separatorColor;
         _currentsegment=0;
         _count=self.segments.count;
-        _width=(self.bounds.size.width-(_count-1)*self.configuration.separatorWidth)/_count;
+        _width=(self.bounds.size.width)/_count;
         _height=self.bounds.size.height;
         NSInteger i=0;
         for (JRSegment* segment in self.segments) {
@@ -59,9 +59,20 @@
             [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
             i++;
         }
+        [self initSeparators];
         [self initIndicator];
     }
     return self;
+}
+
+-(void)initSeparators
+{
+    for (int i=1; i<_count; i++) {
+        UIView* separator=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.configuration.separatorWidth, self.configuration.separatorHeight)];
+        separator.backgroundColor=self.configuration.separatorColor?:self.configuration.tintColor;
+        separator.center=CGPointMake(i*_width, _height*0.5);
+        [self addSubview:separator];
+    }
 }
 
 -(void)initIndicator
@@ -90,7 +101,7 @@
     UIColor* textColor=self.configuration.textColor?:self.configuration.tintColor;
     [button setTitleColor:textColor forState:UIControlStateNormal];
     button.titleLabel.font=self.configuration.font;
-    button.frame=CGRectMake(index*(_width+self.configuration.separatorWidth), 0, _width, _height);
+    button.frame=CGRectMake(index*_width, 0, _width, _height);
     button.tag=index;
     return button;
 }
@@ -99,7 +110,7 @@
 {
     if (sender.tag!=_currentsegment) {
         _currentsegment=sender.tag;
-        CGFloat centerX=(_width+self.configuration.separatorWidth)*_currentsegment+_width*0.5;
+        CGFloat centerX=_width*_currentsegment+_width*0.5;
         CGFloat centerY=self.configuration.indicatorWidth*0.5;
         if (self.configuration.indicatorPosition==JRSegmentedControlIndicatorPositionTop) {
             centerY=self.configuration.indicatorWidth*0.5;
