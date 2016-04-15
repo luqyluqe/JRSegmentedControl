@@ -23,6 +23,11 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		6C1690C1747A12CAAC1D10AC /* Pods_JRSegmentedControl_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC725160828BB124C8708CC /* Pods_JRSegmentedControl_Tests.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		A98659291CC061AC00FA526B /* JRSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A986591B1CC061AC00FA526B /* JRSegmentedControl.m */; };
+		A986592A1CC061AC00FA526B /* JRSegmentedControlConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = A986591D1CC061AC00FA526B /* JRSegmentedControlConfiguration.m */; };
+		A986592B1CC061AC00FA526B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A98659201CC061AC00FA526B /* Info.plist */; };
+		A986592C1CC061AC00FA526B /* JRSegmentedControl.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A98659221CC061AC00FA526B /* JRSegmentedControl.xcconfig */; };
+		A986592D1CC061AC00FA526B /* JRSegmentedControl-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A98659231CC061AC00FA526B /* JRSegmentedControl-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +67,16 @@
 		7FD3AE15D177C809994F49F3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		96B6DCF2F0833A00C5728A46 /* Pods-JRSegmentedControl_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRSegmentedControl_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-JRSegmentedControl_Example/Pods-JRSegmentedControl_Example.release.xcconfig"; sourceTree = "<group>"; };
+		A986591A1CC061AC00FA526B /* JRSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSegmentedControl.h; sourceTree = "<group>"; };
+		A986591B1CC061AC00FA526B /* JRSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSegmentedControl.m; sourceTree = "<group>"; };
+		A986591C1CC061AC00FA526B /* JRSegmentedControlConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSegmentedControlConfiguration.h; sourceTree = "<group>"; };
+		A986591D1CC061AC00FA526B /* JRSegmentedControlConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSegmentedControlConfiguration.m; sourceTree = "<group>"; };
+		A98659201CC061AC00FA526B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A98659211CC061AC00FA526B /* JRSegmentedControl.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = JRSegmentedControl.modulemap; sourceTree = "<group>"; };
+		A98659221CC061AC00FA526B /* JRSegmentedControl.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = JRSegmentedControl.xcconfig; sourceTree = "<group>"; };
+		A98659231CC061AC00FA526B /* JRSegmentedControl-dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JRSegmentedControl-dummy.m"; sourceTree = "<group>"; };
+		A98659241CC061AC00FA526B /* JRSegmentedControl-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JRSegmentedControl-prefix.pch"; sourceTree = "<group>"; };
+		A98659251CC061AC00FA526B /* JRSegmentedControl-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JRSegmentedControl-umbrella.h"; sourceTree = "<group>"; };
 		C07B6E0C84FA420A18049CFB /* Pods-JRSegmentedControl_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRSegmentedControl_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JRSegmentedControl_Tests/Pods-JRSegmentedControl_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		C6C61AC4D185C69BC2EF881E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		FCAEA6A6EF8A57045D7F8C99 /* Pods-JRSegmentedControl_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JRSegmentedControl_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JRSegmentedControl_Example/Pods-JRSegmentedControl_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -107,6 +122,7 @@
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
+				A98659281CC061AC00FA526B /* Development Pods */,
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* Example for JRSegmentedControl */,
 				6003F5B5195388D20070C39A /* Tests */,
@@ -193,6 +209,58 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		A986591E1CC061AC00FA526B /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A986591A1CC061AC00FA526B /* JRSegmentedControl.h */,
+				A986591B1CC061AC00FA526B /* JRSegmentedControl.m */,
+				A986591C1CC061AC00FA526B /* JRSegmentedControlConfiguration.h */,
+				A986591D1CC061AC00FA526B /* JRSegmentedControlConfiguration.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		A986591F1CC061AC00FA526B /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				A986591E1CC061AC00FA526B /* Classes */,
+			);
+			path = Pod;
+			sourceTree = "<group>";
+		};
+		A98659261CC061AC00FA526B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A98659201CC061AC00FA526B /* Info.plist */,
+				A98659211CC061AC00FA526B /* JRSegmentedControl.modulemap */,
+				A98659221CC061AC00FA526B /* JRSegmentedControl.xcconfig */,
+				A98659231CC061AC00FA526B /* JRSegmentedControl-dummy.m */,
+				A98659241CC061AC00FA526B /* JRSegmentedControl-prefix.pch */,
+				A98659251CC061AC00FA526B /* JRSegmentedControl-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/JRSegmentedControl";
+			sourceTree = "<group>";
+		};
+		A98659271CC061AC00FA526B /* JRSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				A986591F1CC061AC00FA526B /* Pod */,
+				A98659261CC061AC00FA526B /* Support Files */,
+			);
+			name = JRSegmentedControl;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		A98659281CC061AC00FA526B /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A98659271CC061AC00FA526B /* JRSegmentedControl */,
+			);
+			name = "Development Pods";
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -276,9 +344,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A986592B1CC061AC00FA526B /* Info.plist in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				A986592C1CC061AC00FA526B /* JRSegmentedControl.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +460,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A986592A1CC061AC00FA526B /* JRSegmentedControlConfiguration.m in Sources */,
+				A986592D1CC061AC00FA526B /* JRSegmentedControl-dummy.m in Sources */,
+				A98659291CC061AC00FA526B /* JRSegmentedControl.m in Sources */,
 				6003F59E195388D20070C39A /* JRAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* JRViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

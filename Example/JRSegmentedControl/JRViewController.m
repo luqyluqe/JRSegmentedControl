@@ -7,6 +7,7 @@
 //
 
 #import "JRViewController.h"
+#import "JRSegmentedControl.h"
 
 @interface JRViewController ()
 
@@ -18,6 +19,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    CGRect bounds=self.view.bounds;
+    NSMutableArray<JRSegment*>* segments=[NSMutableArray new];
+    for (int i=0; i<4; i++) {
+        JRSegment* segment=[JRSegment segmentWithTitle:@"JR" action:nil];
+        [segments addObject:segment];
+    }
+    JRSegmentedControlConfiguration* config=[JRSegmentedControlConfiguration defaultConfiguration];
+    config.separatorWidth=2;
+    JRSegmentedControl* segmentedControl=[[JRSegmentedControl alloc] initWithFrame:CGRectMake(bounds.origin.x, bounds.origin.y+20, bounds.size.width, 30) segments:segments configuration:config];
+    [self.view addSubview:segmentedControl];
 }
 
 - (void)didReceiveMemoryWarning
