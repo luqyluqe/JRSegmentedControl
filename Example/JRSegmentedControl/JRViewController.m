@@ -9,7 +9,7 @@
 #import "JRViewController.h"
 #import "JRSegmentedControl.h"
 
-@interface JRViewController ()
+@interface JRViewController ()<JRSegmentedControlDelegate>
 
 @end
 
@@ -22,14 +22,22 @@
     CGRect bounds=self.view.bounds;
     NSMutableArray<JRSegment*>* segments=[NSMutableArray new];
     for (int i=0; i<4; i++) {
-        JRSegment* segment=[JRSegment segmentWithTitle:@"JR" action:nil];
+        JRSegment* segment=[JRSegment segmentWithTitle:@"JR" action:^(JRSegmentedControl *segmentedControl, JRSegment *segment) {
+            
+        }];
         [segments addObject:segment];
     }
     JRSegmentedControlConfiguration* config=[JRSegmentedControlConfiguration defaultConfiguration];
     config.separatorWidth=1;
     config.separatorHeight=20;
     JRSegmentedControl* segmentedControl=[[JRSegmentedControl alloc] initWithFrame:CGRectMake(bounds.origin.x, bounds.origin.y+20, bounds.size.width, 30) segments:segments configuration:config];
+    segmentedControl.delegate=self;
     [self.view addSubview:segmentedControl];
+}
+
+-(void)segmentedControl:(JRSegmentedControl *)segmentedControl didSelectSegment:(JRSegment *)segment
+{
+    
 }
 
 - (void)didReceiveMemoryWarning

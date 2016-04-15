@@ -10,21 +10,30 @@
 #import "JRSegmentedControlConfiguration.h"
 
 @class JRSegmentedControl;
+@class JRSegment;
 
-typedef void(^JRSegmentedControlAction)(JRSegmentedControl* segmentedControl);
+typedef void(^JRSegmentedControlDidSelectSegmentAction)(JRSegmentedControl* segmentedControl,JRSegment* segment);
 
 @interface JRSegment : NSObject
 
 @property (copy,nonatomic) NSString* title;
-@property (copy,nonatomic) JRSegmentedControlAction action;
+@property (copy,nonatomic) JRSegmentedControlDidSelectSegmentAction didSelectSegmentAction;
 
-+(JRSegment*)segmentWithTitle:(NSString*)title action:(JRSegmentedControlAction)action;
++(JRSegment*)segmentWithTitle:(NSString*)title;
++(JRSegment*)segmentWithTitle:(NSString*)title action:(JRSegmentedControlDidSelectSegmentAction)action;
+
+@end
+
+@protocol JRSegmentedControlDelegate <NSObject>
+
+-(void)segmentedControl:(JRSegmentedControl*)segmentedControl didSelectSegment:(JRSegment*)segment;
 
 @end
 
 @interface JRSegmentedControl : UIView
 
 @property (nonatomic,strong) JRSegmentedControlConfiguration* configuration;
+@property (nonatomic,strong) id<JRSegmentedControlDelegate> delegate;
 
 -(instancetype)initWithFrame:(CGRect)frame segments:(NSArray<JRSegment*>*)segments configuration:(JRSegmentedControlConfiguration*)configuration;
 

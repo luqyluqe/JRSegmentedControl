@@ -10,17 +10,22 @@
 
 @implementation JRSegment
 
-+(JRSegment*)segmentWithTitle:(NSString *)title action:(JRSegmentedControlAction)action
++(JRSegment*)segmentWithTitle:(NSString *)title
+{
+    return [self segmentWithTitle:title action:nil];
+}
+
++(JRSegment*)segmentWithTitle:(NSString *)title action:(JRSegmentedControlDidSelectSegmentAction)action
 {
     JRSegment* segment=[[JRSegment alloc] initWithTitle:title action:action];
     return segment;
 }
 
--(instancetype)initWithTitle:(NSString*)title action:(JRSegmentedControlAction)action
+-(instancetype)initWithTitle:(NSString*)title action:(JRSegmentedControlDidSelectSegmentAction)action
 {
     if (self=[super init]) {
         self.title=title;
-        self.action=action;
+        self.didSelectSegmentAction=action;
     }
     return self;
 }
@@ -122,8 +127,11 @@
         }];
     }
     JRSegment* segment=self.segments[sender.tag];
-    if (segment.action) {
-        segment.action(self);
+    if (segment.didSelectSegmentAction) {
+        segment.didSelectSegmentAction(self,segment);
+    }
+    if (self.delegate) {
+        [self.delegate segmentedControl:self didSelectSegment:segment];
     }
 }
 
