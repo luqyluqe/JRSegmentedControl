@@ -2,7 +2,7 @@
 //  JRSegmentedControl.h
 //  Pods
 //
-//  Created by JIRENTIANXIANG on 4/14/16.
+//  Created by ;; on 4/14/16.
 //
 //
 
@@ -20,10 +20,13 @@ typedef void(^JRSegmentedControlDidSelectSegmentAction)(JRSegmentedControl* segm
 @property (assign,nonatomic) NSInteger tag;
 @property (strong,nonatomic) id data;
 @property (copy,nonatomic) NSString* title;
+@property (copy,nonatomic) NSAttributedString* attributedTitle;
 @property (copy,nonatomic) JRSegmentedControlDidSelectSegmentAction didSelectSegmentAction;
 
 +(JRSegment*)segmentWithTitle:(NSString*)title;
 +(JRSegment*)segmentWithTitle:(NSString*)title action:(JRSegmentedControlDidSelectSegmentAction)action;
++(JRSegment*)segmentWithAttributedTitle:(NSString*)attributedTitle;
++(JRSegment*)segmentWithAttributedTitle:(NSString *)attributedTitle action:(JRSegmentedControlDidSelectSegmentAction)action;
 
 @end
 
@@ -39,5 +42,8 @@ typedef void(^JRSegmentedControlDidSelectSegmentAction)(JRSegmentedControl* segm
 @property (nonatomic,strong) id<JRSegmentedControlDelegate> delegate;
 
 -(instancetype)initWithFrame:(CGRect)frame segments:(NSArray<JRSegment*>*)segments configuration:(JRSegmentedControlConfiguration*)configuration;
+
+-(void)setTitle:(NSString*)title forSegmentAtIndex:(NSInteger)index;
+-(void)setAttributedTitle:(NSAttributedString*)attributedTitle forSegmentAtIndex:(NSInteger)index;
 
 @end

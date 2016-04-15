@@ -27,10 +27,31 @@
     return segment;
 }
 
++(JRSegment*)segmentWithAttributedTitle:(NSString *)attributedTitle
+{
+    JRSegment* segment=[JRSegment segmentWithAttributedTitle:attributedTitle action:nil];
+    return segment;
+}
+
++(JRSegment*)segmentWithAttributedTitle:(NSAttributedString *)attributedTitle action:(JRSegmentedControlDidSelectSegmentAction)action
+{
+    JRSegment* segment=[[JRSegment alloc] initWithAttributedTitle:attributedTitle action:action];
+    return segment;
+}
+
 -(instancetype)initWithTitle:(NSString*)title action:(JRSegmentedControlDidSelectSegmentAction)action
 {
     if (self=[super init]) {
         self.title=title;
+        self.didSelectSegmentAction=action;
+    }
+    return self;
+}
+
+-(instancetype)initWithAttributedTitle:(NSAttributedString*)attributedTitle action:(JRSegmentedControlDidSelectSegmentAction)action
+{
+    if (self=[super init]) {
+        self.attributedTitle=attributedTitle;
         self.didSelectSegmentAction=action;
     }
     return self;
@@ -65,7 +86,12 @@
         _height=self.bounds.size.height;
         NSInteger i=0;
         for (JRSegment* segment in self.segments) {
-            UIButton* button=[self buttonWithTitle:segment.title atIndex:i];
+            UIButton* button;
+            if (segment.attributedTitle) {
+                button=[self buttonWithAttributedTitle:segment.attributedTitle atIndex:i];
+            }else{
+                button=[self buttonWithTitle:segment.title atIndex:i];
+            }
             [self addSubview:button];
             [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
             i++;
@@ -106,9 +132,32 @@
 
 -(UIButton*)buttonWithTitle:(NSString*)title atIndex:(NSInteger)index
 {
+    UIButton* button=[self buttonAtIndex:index];
+    [button setTitle:title forState:UIControlStateNormal];
+    return button;
+}
+
+-(UIButton*)buttonWithAttributedTitle:(NSAttributedString*)attributedTitle atIndex:(NSInteger)index
+{
+    UIButton* button=[self buttonAtIndex:index];
+    [button setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+    return button;
+}
+
+-(void)setTitle:(NSString *)title forSegmentAtIndex:(NSInteger)index
+{
+    self.segments[index].title=title;
+}
+
+-(void)setAttributedTitle:(NSAttributedString *)attributedTitle forSegmentAtIndex:(NSInteger)index
+{
+    self.segments[index].attributedTitle=attributedTitle;
+}
+
+-(UIButton*)buttonAtIndex:(NSInteger)index
+{
     UIButton* button=[UIButton buttonWithType:UIButtonTypeSystem];
     button.backgroundColor=self.configuration.backgroundColor;
-    [button setTitle:title forState:UIControlStateNormal];
     UIColor* textColor=self.configuration.textColor?:self.configuration.tintColor;
     [button setTitleColor:textColor forState:UIControlStateNormal];
     button.titleLabel.font=self.configuration.font;
