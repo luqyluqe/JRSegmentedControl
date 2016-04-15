@@ -8,6 +8,12 @@
 
 #import "JRSegmentedControl.h"
 
+@interface JRSegment ()
+
+@property (nonatomic,assign) NSInteger index;
+
+@end
+
 @implementation JRSegment
 
 +(JRSegment*)segmentWithTitle:(NSString *)title
@@ -127,6 +133,7 @@
         }];
     }
     JRSegment* segment=self.segments[sender.tag];
+    segment.index=sender.tag;
     if (segment.didSelectSegmentAction) {
         segment.didSelectSegmentAction(self,segment);
     }

@@ -16,6 +16,9 @@ typedef void(^JRSegmentedControlDidSelectSegmentAction)(JRSegmentedControl* segm
 
 @interface JRSegment : NSObject
 
+@property (readonly,nonatomic) NSInteger index;
+@property (assign,nonatomic) NSInteger tag;
+@property (strong,nonatomic) id data;
 @property (copy,nonatomic) NSString* title;
 @property (copy,nonatomic) JRSegmentedControlDidSelectSegmentAction didSelectSegmentAction;
 
