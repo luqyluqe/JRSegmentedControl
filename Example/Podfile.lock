@@ -1,0 +1,21 @@
+PODS:
+  - FBSnapshotTestCase (2.1.0):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.0)
+  - FBSnapshotTestCase/Core (2.1.0)
+  - FBSnapshotTestCase/SwiftSupport (2.1.0):
+    - FBSnapshotTestCase/Core
+  - JRSegmentedControl (0.1.0)
+
+DEPENDENCIES:
+  - FBSnapshotTestCase
+  - JRSegmentedControl (from `../`)
+
+EXTERNAL SOURCES:
+  JRSegmentedControl:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FBSnapshotTestCase: 366ecd378511d7716c79991cd8067d1eed23578d
+  JRSegmentedControl: 406bb9e7bc5422bc25887f680799bea2f8731e1d
+
+COCOAPODS: 0.39.0
