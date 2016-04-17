@@ -62,6 +62,7 @@
 @interface JRSegmentedControl ()
 
 @property (strong,nonatomic) NSArray<JRSegment*>* segments;
+@property (strong,nonatomic) NSMutableArray<UIButton*>* buttons;
 @property (strong,nonatomic) UIView* indicator;
 
 @end
@@ -79,6 +80,7 @@
     if (self=[super initWithFrame:frame]) {
         self.configuration=configuration;
         self.segments=segments;
+        self.buttons=[NSMutableArray new];
         self.backgroundColor=self.configuration.tintColor?:self.configuration.separatorColor;
         _currentsegment=0;
         _count=self.segments.count;
@@ -92,6 +94,7 @@
             }else{
                 button=[self buttonWithTitle:segment.title atIndex:i];
             }
+            [self.buttons addObject:button];
             [self addSubview:button];
             [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
             i++;
@@ -147,11 +150,13 @@
 -(void)setTitle:(NSString *)title forSegmentAtIndex:(NSInteger)index
 {
     self.segments[index].title=title;
+    [self.buttons[index] setTitle:title forState:UIControlStateNormal];
 }
 
 -(void)setAttributedTitle:(NSAttributedString *)attributedTitle forSegmentAtIndex:(NSInteger)index
 {
     self.segments[index].attributedTitle=attributedTitle;
+    [self.buttons[index] setAttributedTitle:attributedTitle forState:UIControlStateNormal];
 }
 
 -(UIButton*)buttonAtIndex:(NSInteger)index
