@@ -39,7 +39,7 @@ typedef void(^JRSegmentedControlDidSelectSegmentAction)(JRSegmentedControl* segm
 @interface JRSegmentedControl : UIView
 
 @property (nonatomic,strong) JRSegmentedControlConfiguration* configuration;
-@property (nonatomic,strong) id<JRSegmentedControlDelegate> delegate;
+@property (nonatomic,weak) id<JRSegmentedControlDelegate> delegate;
 
 -(instancetype)initWithFrame:(CGRect)frame segments:(NSArray<JRSegment*>*)segments configuration:(JRSegmentedControlConfiguration*)configuration;
 
