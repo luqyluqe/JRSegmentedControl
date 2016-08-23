@@ -177,13 +177,22 @@
         _currentsegment=sender.tag;
         CGFloat centerX=_width*_currentsegment+_width*0.5;
         CGFloat centerY=self.configuration.indicatorWidth*0.5;
+        CGFloat distance=ABS(centerX-self.indicator.center.x);
         if (self.configuration.indicatorPosition==JRSegmentedControlIndicatorPositionTop) {
             centerY=self.configuration.indicatorWidth*0.5;
         }else if (self.configuration.indicatorPosition==JRSegmentedControlIndicatorPositionBottom){
             centerY=_height-self.configuration.indicatorWidth*0.5;
         }
-        [UIView animateWithDuration:0.4 animations:^{
+        CGRect originalBounds=self.indicator.bounds;
+        [UIView animateWithDuration:0.2 animations:^{
             self.indicator.center=CGPointMake(centerX,centerY);
+        }];
+        [UIView animateWithDuration:0.1 animations:^{
+            self.indicator.bounds=CGRectMake(originalBounds.origin.x, originalBounds.origin.y, originalBounds.size.width*MIN(1+0.25*distance/originalBounds.size.width, 2), originalBounds.size.height);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.1 animations:^{
+                self.indicator.bounds=originalBounds;
+            } completion:nil];
         }];
     }
     JRSegment* segment=self.segments[sender.tag];
