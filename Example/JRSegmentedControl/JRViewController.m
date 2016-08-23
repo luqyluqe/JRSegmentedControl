@@ -35,9 +35,8 @@
     [self.view addSubview:segmentedControl];
 }
 
--(void)segmentedControl:(JRSegmentedControl *)segmentedControl didSelectSegment:(JRSegment *)segment
+-(void)segmentedControl:(JRSegmentedControl *)segmentedControl didSelectSegment:(JRSegment *)segment button:(UIButton *)button
 {
-    
 }
 
 - (void)didReceiveMemoryWarning

@@ -32,7 +32,7 @@ typedef void(^JRSegmentedControlDidSelectSegmentAction)(JRSegmentedControl* segm
 
 @protocol JRSegmentedControlDelegate <NSObject>
 
--(void)segmentedControl:(JRSegmentedControl*)segmentedControl didSelectSegment:(JRSegment*)segment;
+-(void)segmentedControl:(JRSegmentedControl*)segmentedControl didSelectSegment:(JRSegment*)segment button:(UIButton*)button;
 
 @end
 
@@ -40,6 +40,8 @@ typedef void(^JRSegmentedControlDidSelectSegmentAction)(JRSegmentedControl* segm
 
 @property (nonatomic,strong) JRSegmentedControlConfiguration* configuration;
 @property (nonatomic,weak) id<JRSegmentedControlDelegate> delegate;
+
+@property (strong,readonly) NSArray<UIButton*>* buttons;
 
 -(instancetype)initWithFrame:(CGRect)frame segments:(NSArray<JRSegment*>*)segments configuration:(JRSegmentedControlConfiguration*)configuration;
 

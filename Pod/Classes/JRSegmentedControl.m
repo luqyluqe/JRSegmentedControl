@@ -62,7 +62,6 @@
 @interface JRSegmentedControl ()
 
 @property (strong,nonatomic) NSArray<JRSegment*>* segments;
-@property (strong,nonatomic) NSMutableArray<UIButton*>* buttons;
 @property (strong,nonatomic) UIView* indicator;
 
 @end
@@ -73,6 +72,8 @@
     NSInteger _currentsegment;
     CGFloat _width;
     CGFloat _height;
+    
+    NSMutableArray<UIButton*>* _buttons;
 }
 
 -(instancetype)initWithFrame:(CGRect)frame segments:(NSArray<JRSegment *> *)segments configuration:(JRSegmentedControlConfiguration *)configuration
@@ -80,7 +81,7 @@
     if (self=[super initWithFrame:frame]) {
         self.configuration=configuration;
         self.segments=segments;
-        self.buttons=[NSMutableArray new];
+        _buttons=[NSMutableArray new];
         self.backgroundColor=self.configuration.tintColor?:self.configuration.separatorColor;
         _currentsegment=0;
         _count=self.segments.count;
@@ -94,7 +95,7 @@
             }else{
                 button=[self buttonWithTitle:segment.title atIndex:i];
             }
-            [self.buttons addObject:button];
+            [_buttons addObject:button];
             [self addSubview:button];
             [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
             i++;
@@ -161,7 +162,7 @@
 
 -(UIButton*)buttonAtIndex:(NSInteger)index
 {
-    UIButton* button=[UIButton buttonWithType:UIButtonTypeSystem];
+    UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
     button.backgroundColor=self.configuration.backgroundColor;
     UIColor* textColor=self.configuration.textColor?:self.configuration.tintColor;
     [button setTitleColor:textColor forState:UIControlStateNormal];
@@ -200,8 +201,8 @@
     if (segment.didSelectSegmentAction) {
         segment.didSelectSegmentAction(self,segment);
     }
-    if (self.delegate) {
-        [self.delegate segmentedControl:self didSelectSegment:segment];
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(segmentedControl:didSelectSegment:button:)]) {
+        [self.delegate segmentedControl:self didSelectSegment:segment button:sender];
     }
 }
 
