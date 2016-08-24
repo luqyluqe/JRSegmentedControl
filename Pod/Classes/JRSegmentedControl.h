@@ -32,14 +32,17 @@ typedef void(^JRSegmentedControlDidSelectSegmentAction)(JRSegmentedControl* segm
 
 @protocol JRSegmentedControlDelegate <NSObject>
 
--(void)segmentedControl:(JRSegmentedControl*)segmentedControl didSelectSegment:(JRSegment*)segment button:(UIButton*)button;
+-(void)segmentedControl:(JRSegmentedControl*)segmentedControl didSelectSegment:(JRSegment*)segment button:(UIButton*)button lastSelectedSegment:(JRSegment*)lastSegment lastSelectedButton:(UIButton*)lastButton;
 
 @end
 
 @interface JRSegmentedControl : UIView
 
-@property (nonatomic,strong) JRSegmentedControlConfiguration* configuration;
+@property (nonatomic,readonly) JRSegmentedControlConfiguration* configuration;
 @property (nonatomic,weak) id<JRSegmentedControlDelegate> delegate;
+
+@property (nonatomic,readonly) JRSegment* selectedSegemnt;
+@property (nonatomic,readonly) UIButton* selectedButton;
 
 @property (strong,readonly) NSArray<UIButton*>* buttons;
 
@@ -47,5 +50,7 @@ typedef void(^JRSegmentedControlDidSelectSegmentAction)(JRSegmentedControl* segm
 
 -(void)setTitle:(NSString*)title forSegmentAtIndex:(NSInteger)index;
 -(void)setAttributedTitle:(NSAttributedString*)attributedTitle forSegmentAtIndex:(NSInteger)index;
+
+-(void)selectSegmentAtIndex:(NSInteger)index animated:(BOOL)animated;
 
 @end

@@ -35,8 +35,10 @@
     [self.view addSubview:segmentedControl];
 }
 
--(void)segmentedControl:(JRSegmentedControl *)segmentedControl didSelectSegment:(JRSegment *)segment button:(UIButton *)button
+-(void)segmentedControl:(JRSegmentedControl *)segmentedControl didSelectSegment:(JRSegment *)segment button:(UIButton *)button lastSelectedSegment:(JRSegment *)lastSegment lastSelectedButton:(UIButton *)lastButton
 {
+    [button.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [lastButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
 }
 
 - (void)didReceiveMemoryWarning

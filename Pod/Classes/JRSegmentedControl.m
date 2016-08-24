@@ -69,7 +69,6 @@
 @implementation JRSegmentedControl
 {
     NSInteger _count;
-    NSInteger _currentsegment;
     CGFloat _width;
     CGFloat _height;
     
@@ -79,16 +78,17 @@
 -(instancetype)initWithFrame:(CGRect)frame segments:(NSArray<JRSegment *> *)segments configuration:(JRSegmentedControlConfiguration *)configuration
 {
     if (self=[super initWithFrame:frame]) {
-        self.configuration=configuration;
+        _configuration=configuration;
         self.segments=segments;
         _buttons=[NSMutableArray new];
         self.backgroundColor=self.configuration.tintColor?:self.configuration.separatorColor;
-        _currentsegment=0;
+        _selectedSegemnt=[segments firstObject];
         _count=self.segments.count;
         _width=(self.bounds.size.width)/_count;
         _height=self.bounds.size.height;
         NSInteger i=0;
         for (JRSegment* segment in self.segments) {
+            segment.index=i;
             UIButton* button;
             if (segment.attributedTitle) {
                 button=[self buttonWithAttributedTitle:segment.attributedTitle atIndex:i];
@@ -100,6 +100,7 @@
             [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
             i++;
         }
+        _selectedButton=[self.buttons firstObject];
         [self initSeparators];
         [self initIndicator];
     }
@@ -124,7 +125,7 @@
     }else if (self.configuration.indicatorPosition==JRSegmentedControlIndicatorPositionBottom){
         originY=_height-self.configuration.indicatorWidth;
     }
-    self.indicator=[[UIView alloc] initWithFrame:CGRectMake(_currentsegment*_width, originY, _width, self.configuration.indicatorWidth)];
+    self.indicator=[[UIView alloc] initWithFrame:CGRectMake(self.selectedSegemnt.index*_width, originY, _width, self.configuration.indicatorWidth)];
     if (self.configuration.indicatorColor) {
         self.indicator.backgroundColor=self.configuration.indicatorColor;
     }else{
@@ -174,9 +175,13 @@
 
 -(void)buttonPressed:(UIButton*)sender
 {
-    if (sender.tag!=_currentsegment) {
-        _currentsegment=sender.tag;
-        CGFloat centerX=_width*_currentsegment+_width*0.5;
+    [self selectSegmentAtIndex:sender.tag animated:YES];
+}
+
+-(void)selectSegmentAtIndex:(NSInteger)index animated:(BOOL)animated
+{
+    if (index!=self.selectedSegemnt.index) {
+        CGFloat centerX=_width*index+_width*0.5;
         CGFloat centerY=self.configuration.indicatorWidth*0.5;
         CGFloat distance=ABS(centerX-self.indicator.center.x);
         if (self.configuration.indicatorPosition==JRSegmentedControlIndicatorPositionTop) {
@@ -185,25 +190,31 @@
             centerY=_height-self.configuration.indicatorWidth*0.5;
         }
         CGRect originalBounds=self.indicator.bounds;
-        [UIView animateWithDuration:0.2 animations:^{
-            self.indicator.center=CGPointMake(centerX,centerY);
-        }];
-        [UIView animateWithDuration:0.1 animations:^{
-            self.indicator.bounds=CGRectMake(originalBounds.origin.x, originalBounds.origin.y, originalBounds.size.width*MIN(1+0.25*distance/originalBounds.size.width, 2), originalBounds.size.height);
-        } completion:^(BOOL finished) {
+        if (animated) {
+            [UIView animateWithDuration:0.2 animations:^{
+                self.indicator.center=CGPointMake(centerX,centerY);
+            }];
             [UIView animateWithDuration:0.1 animations:^{
-                self.indicator.bounds=originalBounds;
-            } completion:nil];
-        }];
+                self.indicator.bounds=CGRectMake(originalBounds.origin.x, originalBounds.origin.y, originalBounds.size.width*MIN(1+0.25*distance/originalBounds.size.width, 2), originalBounds.size.height);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.1 animations:^{
+                    self.indicator.bounds=originalBounds;
+                } completion:nil];
+            }];
+        }else{
+            self.indicator.center=CGPointMake(centerX,centerY);
+        }
     }
-    JRSegment* segment=self.segments[sender.tag];
-    segment.index=sender.tag;
+    JRSegment* segment=self.segments[index];
+    segment.index=index;
     if (segment.didSelectSegmentAction) {
         segment.didSelectSegmentAction(self,segment);
     }
-    if (self.delegate&&[self.delegate respondsToSelector:@selector(segmentedControl:didSelectSegment:button:)]) {
-        [self.delegate segmentedControl:self didSelectSegment:segment button:sender];
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(segmentedControl:didSelectSegment:button:lastSelectedSegment:lastSelectedButton:)]) {
+        [self.delegate segmentedControl:self didSelectSegment:segment button:self.buttons[index] lastSelectedSegment:self.selectedSegemnt lastSelectedButton:self.selectedButton];
     }
+    _selectedSegemnt=segment;
+    _selectedButton=self.buttons[index];
 }
 
 @end
